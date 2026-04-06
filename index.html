@@ -1538,8 +1538,8 @@ textarea {
     <div class="modal-title">Anthropic API Key</div>
     <div class="modal-sub">
       Required for AI-powered Dial In estimates.<br>
-      Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
-      Your key is stored only in this browser session.
+      Get your key at <a href="https://console.anthropic.com/settings/api-keys" target="_blank">console.anthropic.com → API Keys</a>.<br>
+      Your key is saved in this browser (<code style="font-size:11px;color:var(--amber)">localStorage</code>) and never leaves your device.
     </div>
     <div class="key-input-row">
       <input type="password" id="key-input" placeholder="sk-ant-…" autocomplete="off" autocorrect="off" spellcheck="false">
@@ -1995,7 +1995,7 @@ Respond ONLY with this JSON, no other text:
         try { resolve(JSON.parse(clean)); }
         catch(e) { reject(new Error('Could not parse AI response as JSON: ' + clean.slice(0, 100))); }
       };
-      xhr.onerror   = () => reject(new Error('Network error — check your internet connection.'));
+      xhr.onerror   = () => reject(new Error(`Network/CORS error (status ${xhr.status}). Key may be invalid or the API rejected the preflight.`));
       xhr.ontimeout = () => reject(new Error('Request timed out after 30s.'));
       xhr.send(JSON.stringify({
         model: 'claude-sonnet-4-5',
@@ -2007,12 +2007,16 @@ Respond ONLY with this JSON, no other text:
     resetBtn();
   } catch(err) {
     resetBtn();
+    const keyPreview = window.__anthropicKey
+      ? window.__anthropicKey.slice(0,10) + '…' + window.__anthropicKey.slice(-4)
+      : 'NOT SET';
     resultEl.innerHTML = `<div class="data-warning">
-      <strong>Error: ${err.message}</strong><br><br>
-      Common causes:<br>
-      • Invalid API key — re-enter it via the 🔑 icon<br>
-      • Key has no credits — check <a href="https://console.anthropic.com" target="_blank" style="color:var(--amber-lt)">console.anthropic.com</a><br>
-      • Opening file locally instead of via GitHub Pages
+      <strong>❌ ${err.message}</strong><br><br>
+      <strong>Key in use:</strong> <code style="color:var(--amber-lt);font-size:11px">${keyPreview}</code><br><br>
+      Try these steps:<br>
+      1. Tap 🔑 and re-paste your full API key<br>
+      2. Confirm it starts with <code>sk-ant-api03-</code><br>
+      3. Check you have credits at <a href="https://console.anthropic.com/settings/billing" target="_blank" style="color:var(--amber-lt)">console.anthropic.com/settings/billing</a>
     </div>`;
     return;
   }
@@ -2110,14 +2114,15 @@ Respond ONLY with this JSON, no other text:
 }
 
 /* ── API KEY MANAGEMENT ───────────────────────────────────────────────────── */
-window.__anthropicKey = sessionStorage.getItem('__el_ak') || null;
+window.__anthropicKey = localStorage.getItem('__el_ak') || sessionStorage.getItem('__el_ak') || null;
 
 function openKeyModal() {
   const modal = document.getElementById('key-modal');
   const input = document.getElementById('key-input');
+  // Show the stored key so user can see / replace it
   if (window.__anthropicKey) input.value = window.__anthropicKey;
   modal.classList.add('show');
-  setTimeout(() => input.focus(), 350);
+  setTimeout(() => { input.focus(); input.select(); }, 350);
 }
 
 function closeKeyModal() {
@@ -2130,9 +2135,10 @@ function closeKeyModalOutside(e) {
 
 function saveApiKey() {
   const val = document.getElementById('key-input').value.trim();
-  if (!val.startsWith('sk-ant-')) { toast('Key should start with sk-ant-…', 'error'); return; }
+  if (!val.startsWith('sk-')) { toast('Key should start with sk-ant-…', 'error'); return; }
   window.__anthropicKey = val;
   sessionStorage.setItem('__el_ak', val);
+  try { localStorage.setItem('__el_ak', val); } catch(e) {}
   document.getElementById('key-btn').classList.add('set');
   closeKeyModal();
   toast('✓ API key saved for this session');
