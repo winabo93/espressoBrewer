@@ -731,6 +731,390 @@ textarea {
   .shot-stats { grid-template-columns: repeat(6, 1fr); }
   .preview-stats { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ── API KEY MODAL ───────────────────────────────────────────────────────── */
+.key-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.key-btn:active, .key-btn.set { border-color: var(--amber); color: var(--amber); }
+.key-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 800;
+  display: flex; align-items: flex-end;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-backdrop.show { opacity: 1; pointer-events: all; }
+
+.modal-sheet {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 28px 20px;
+  padding-bottom: calc(28px + var(--safe-b));
+  width: 100%;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-backdrop.show .modal-sheet { transform: translateY(0); }
+
+.modal-handle {
+  width: 36px; height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto 24px;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.modal-sub {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.modal-sub a { color: var(--amber-lt); text-decoration: none; }
+
+.key-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.key-input-row input {
+  flex: 1;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.key-save-btn {
+  height: 48px;
+  padding: 0 20px;
+  background: var(--amber);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #1a0f00;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.key-save-btn:active { background: var(--amber-lt); }
+
+.key-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+
+/* ── DIAL-IN TAB ─────────────────────────────────────────────────────────── */
+.dial-result {
+  display: none;
+  animation: fadeUp 0.3s ease;
+}
+.dial-result.show { display: block; }
+
+.result-hero {
+  background: linear-gradient(135deg, #1e1914 0%, #251e14 100%);
+  border: 1px solid rgba(200,133,58,0.3);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,133,58,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.result-hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+
+.result-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.result-big {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-big-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1;
+}
+
+.result-big-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--amber);
+  margin-left: 4px;
+}
+
+.result-big-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.result-sub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.result-sub-cell {
+  background: rgba(14,12,10,0.5);
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.result-sub-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.result-sub-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.confidence-bar-wrap {
+  margin-bottom: 14px;
+}
+
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.confidence-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.confidence-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.confidence-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-lt));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+.ai-reasoning {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.ai-reasoning-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.ai-dot.done { animation: none; background: var(--green, #4a8c5c); }
+
+.ai-reasoning-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.ai-reasoning-text em {
+  color: var(--amber-lt);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.nearby-shots {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.nearby-shot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+
+.nearby-shot-row:last-child { border-bottom: none; padding-bottom: 0; }
+.nearby-shot-row:first-child { padding-top: 0; }
+
+.nearby-shot-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.nearby-shot-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.nearby-shot-grind {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.similarity-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  display: block;
+  text-align: right;
+}
+
+.thinking-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 20px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.thinking-dots span {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: bounce 1.2s ease infinite;
+  margin: 0 2px;
+}
+
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
+
+.data-warning {
+  background: rgba(200,133,58,0.06);
+  border: 1px solid rgba(200,133,58,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.data-warning strong { color: var(--amber); }
 </style>
 </head>
 <body>
@@ -747,7 +1131,12 @@ textarea {
       </svg>
       <div class="logo-text">Espresso<span>Lab</span></div>
     </div>
+    <div style="display:flex;align-items:center;gap:10px;">
     <div class="header-badge">HOME BREW</div>
+    <button class="key-btn" id="key-btn" onclick="openKeyModal()" title="Set API Key">
+      <svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+    </button>
+  </div>
   </div>
 </header>
 
@@ -1043,6 +1432,77 @@ textarea {
     </div>
   </div>
 
+
+  <!-- ══ DIAL IN ══ -->
+  <div id="tab-dialin" class="tab-panel">
+    <p class="page-title">Dial In</p>
+    <p class="page-sub">AI estimates your machine settings</p>
+
+    <div class="card">
+      <div class="card-label">Your Setup</div>
+      <div class="field">
+        <label>Machine</label>
+        <select id="di-machine">
+          <option value="">Select machine…</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Coffee Bean</label>
+        <select id="di-bean">
+          <option value="">Select bean…</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Bean Freshness</div>
+      <div class="field" style="margin-bottom:0">
+        <label>Roast Date</label>
+        <input type="date" id="di-roast-date">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Target Shot</div>
+      <div class="field-row">
+        <div class="field" style="margin-bottom:0">
+          <label>Dose In (g)</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-dose',-0.1)">−</button>
+            <input type="number" id="di-dose" value="18" min="0" step="0.1">
+            <button class="stepper-btn" onclick="stepVal('di-dose',0.1)">+</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Yield Out (g)</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-yield',-0.1)">−</button>
+            <input type="number" id="di-yield" value="36" min="0" step="0.1">
+            <button class="stepper-btn" onclick="stepVal('di-yield',0.1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="field" style="margin-bottom:0">
+        <label>Target Brew Time (s)</label>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="stepVal('di-brew-time',-1)">−</button>
+          <input type="number" id="di-brew-time" value="28" min="0">
+          <button class="stepper-btn" onclick="stepVal('di-brew-time',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" id="di-estimate-btn" onclick="runDialIn()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      Estimate Settings
+    </button>
+
+    <!-- Result area -->
+    <div style="height:20px"></div>
+    <div id="di-result" class="dial-result"></div>
+  </div>
+
 </main>
 
 <!-- ── BOTTOM NAV ─────────────────────────────────────────────────────────── -->
@@ -1064,7 +1524,30 @@ textarea {
     <span>History</span>
     <div class="nav-dot" id="history-dot"></div>
   </button>
+  <button class="nav-btn" id="nav-dialin" onclick="switchTab('dialin')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+    <span>Dial In</span>
+    <div class="nav-dot" id="dialin-dot"></div>
+  </button>
 </nav>
+
+<!-- ── API KEY MODAL ──────────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="key-modal" onclick="closeKeyModalOutside(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Anthropic API Key</div>
+    <div class="modal-sub">
+      Required for AI-powered Dial In estimates.<br>
+      Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+      Your key is stored only in this browser session.
+    </div>
+    <div class="key-input-row">
+      <input type="password" id="key-input" placeholder="sk-ant-…" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="key-save-btn" onclick="saveApiKey()">Save</button>
+    </div>
+    <div class="key-hint">Your key is never sent anywhere except directly to api.anthropic.com.<br>It is stored in sessionStorage and cleared when you close the tab.</div>
+  </div>
+</div>
 
 <div id="toast"></div>
 
@@ -1097,6 +1580,7 @@ function switchTab(name) {
   if (name === 'beans')    loadBeans();
   if (name === 'brew')     loadBrewSelects();
   if (name === 'history')  { loadHistory(); document.getElementById('history-dot').classList.remove('show'); }
+  if (name === 'dialin')   { loadDialInSelects(); document.getElementById('dialin-dot').classList.remove('show'); }
 }
 
 /* ── TEMP BUTTONS ─────────────────────────────────────────────────────────── */
@@ -1348,6 +1832,309 @@ function loadHistory() {
         </div>`;
     }).join('');
   }).catch(() => {});
+}
+
+/* ── DIAL-IN ──────────────────────────────────────────────────────────────── */
+function loadDialInSelects() {
+  Promise.all([dbGet('machines'), dbGet('beans')]).then(([ms, bs]) => {
+    const mSel = document.getElementById('di-machine');
+    const bSel = document.getElementById('di-bean');
+    const prevM = mSel.value, prevB = bSel.value;
+
+    mSel.innerHTML = '<option value="">Select machine…</option>';
+    if (ms) { machineCache = ms; Object.entries(ms).forEach(([k,m]) => { mSel.innerHTML += `<option value="${k}">${m.name}</option>`; }); }
+    if (prevM) mSel.value = prevM;
+
+    bSel.innerHTML = '<option value="">Select bean…</option>';
+    if (bs) { beanCache = bs; Object.entries(bs).forEach(([k,b]) => { bSel.innerHTML += `<option value="${k}">${b.name}${b.roast ? ' · ' + b.roast : ''}</option>`; }); }
+    if (prevB) bSel.value = prevB;
+  }).catch(() => {});
+}
+
+async function runDialIn() {
+  const machineId = document.getElementById('di-machine').value;
+  const beanId    = document.getElementById('di-bean').value;
+  const roastDate = document.getElementById('di-roast-date').value;
+  const dose      = parseFloat(document.getElementById('di-dose').value);
+  const yld       = parseFloat(document.getElementById('di-yield').value);
+  const brewTime  = parseInt(document.getElementById('di-brew-time').value);
+
+  if (!machineId || !beanId) { toast('Select a machine and bean first', 'error'); return; }
+  if (!dose || !yld || !brewTime) { toast('Fill in dose, yield and brew time', 'error'); return; }
+
+  const machine = machineCache[machineId];
+  const bean    = beanCache[beanId];
+  const daysSinceRoast = roastDate ? Math.floor((Date.now() - new Date(roastDate).getTime()) / 86400000) : null;
+  const targetRatio = yld / dose;
+
+  // Show thinking state
+  const resultEl = document.getElementById('di-result');
+  resultEl.classList.add('show');
+  resultEl.innerHTML = `
+    <div class="thinking-state">
+      <div class="thinking-dots"><span></span><span></span><span></span></div>
+      Analysing your brew history…
+    </div>`;
+
+  // Fetch all brew history
+  let brews = {};
+  try { brews = await dbGet('brews') || {}; } catch(e) {}
+
+  // ── LOCAL INTERPOLATION ───────────────────────────────────────────────────
+  // Score each historical brew for similarity to the current request
+  const allBrews = Object.values(brews);
+  const relevantBrews = allBrews.filter(b =>
+    b.grindSize && b.doseIn && b.yieldOut && b.brewTime
+  );
+
+  // Score similarity: same machine gets heavy weight, same bean gets heavy weight,
+  // similar ratio and brew time also scored
+  function scoreBrew(b) {
+    let score = 0;
+    if (b.machineId === machineId) score += 40;
+    if (b.beanId === beanId) score += 30;
+    const ratioDiff = Math.abs((b.yieldOut / b.doseIn) - targetRatio);
+    score += Math.max(0, 20 - ratioDiff * 20);
+    const timeDiff = Math.abs(b.brewTime - brewTime);
+    score += Math.max(0, 10 - timeDiff);
+    return score;
+  }
+
+  const scored = relevantBrews
+    .map(b => ({ ...b, _score: scoreBrew(b) }))
+    .filter(b => b._score > 0)
+    .sort((a, b) => b._score - a._score)
+    .slice(0, 5);
+
+  const hasMachineData  = scored.some(b => b.machineId === machineId);
+  const hasBeanData     = scored.some(b => b.beanId === beanId);
+  const totalBrews      = relevantBrews.length;
+
+  // Build context for Claude
+  const contextSummary = scored.length > 0
+    ? scored.map(b => {
+        const ratio = (b.yieldOut / b.doseIn).toFixed(2);
+        const dsr = b.daysSinceRoast !== null ? `${b.daysSinceRoast}d off roast` : '';
+        return `- Grind ${b.grindSize}, dose ${b.doseIn}g → ${b.yieldOut}g (1:${ratio}) in ${b.brewTime}s, grind time ${b.grindTime || '?'}s ${dsr} [machine match: ${b.machineId === machineId}, bean match: ${b.beanId === beanId}]`;
+      }).join('\n')
+    : 'No historical data available — use espresso domain knowledge only.';
+
+  const prompt = `You are an expert espresso technician and data analyst. A user wants to dial in their espresso machine. Analyse the data and provide precise machine setting recommendations.
+
+MACHINE: ${machine?.name || 'Unknown'} (${machine?.brand || ''} ${machine?.model || ''})
+BEAN: ${bean?.name || 'Unknown'} — ${bean?.roast || ''} roast, ${bean?.type || ''}, ${bean?.process || ''} process, origin: ${bean?.country || 'unknown'}
+DAYS SINCE ROAST: ${daysSinceRoast !== null ? daysSinceRoast + ' days' : 'unknown'}
+
+TARGET SHOT:
+- Dose in: ${dose}g
+- Yield out: ${yld}g  
+- Target ratio: 1:${targetRatio.toFixed(2)}
+- Target brew time: ${brewTime}s
+
+HISTORICAL BREW DATA (${totalBrews} total shots logged, top ${scored.length} most relevant):
+${contextSummary}
+
+Based on this data, provide:
+1. Recommended grind size (numeric, e.g. 7.5)
+2. Recommended grind time in seconds
+3. Water temperature offset (-2, -1, default, +1, or +2)
+4. Confidence level 0-100
+5. Brief reasoning (2-3 sentences max, highlight key factors like days off roast, ratio, and any pattern from history)
+
+Respond ONLY with this JSON, no other text:
+{
+  "grindSize": 7.5,
+  "grindTime": 22,
+  "tempOffset": "default",
+  "confidence": 78,
+  "reasoning": "...",
+  "dataQuality": "good|limited|none"
+}`;
+
+  // Capture button HTML before any async work
+  const btn = document.getElementById('di-estimate-btn');
+  const estimateBtnHTML = btn.innerHTML;
+
+  function resetBtn() {
+    btn.disabled = false;
+    btn.innerHTML = estimateBtnHTML;
+  }
+
+  // Check API key before touching the button
+  const apiKey = window.__anthropicKey;
+  if (!apiKey) {
+    resultEl.innerHTML = `<div class="data-warning"><strong>API key not set.</strong> Tap the 🔑 key icon in the top-right corner to enter your Anthropic API key. Get one free at <a href="https://console.anthropic.com" target="_blank" style="color:var(--amber-lt)">console.anthropic.com</a>.</div>`;
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span> Analysing…';
+
+  let aiResult = null;
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      throw new Error(errBody?.error?.message || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const text = data.content?.map(c => c.text || '').join('') || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    aiResult = JSON.parse(clean);
+    resetBtn();
+  } catch(err) {
+    resetBtn();
+    const isCors = err.message === 'Failed to fetch';
+    resultEl.innerHTML = `<div class="data-warning">
+      <strong>${isCors ? 'CORS error.' : 'API error.'}</strong>
+      ${isCors
+        ? 'This error only happens when opening the file locally. Once deployed to <strong>GitHub Pages</strong> it will work. You can also test by running a local server (<code>npx serve .</code>).'
+        : err.message}
+    </div>`;
+    return;
+  }
+
+  // ── RENDER RESULT ─────────────────────────────────────────────────────────
+  const confidence = aiResult.confidence || 0;
+  const confColor  = confidence >= 70 ? '#4a8c5c' : confidence >= 40 ? '#c8853a' : '#b84b3a';
+
+  const nearbyHTML = scored.length > 0 ? `
+    <div class="nearby-shots">
+      <div class="card-label">Reference Shots</div>
+      ${scored.slice(0,3).map(b => {
+        const ratio = (b.yieldOut / b.doseIn).toFixed(1);
+        const matchType = b.machineId === machineId && b.beanId === beanId ? 'same machine + bean'
+                        : b.machineId === machineId ? 'same machine'
+                        : b.beanId === beanId ? 'same bean' : 'similar ratio';
+        return `
+          <div class="nearby-shot-row">
+            <div>
+              <div class="nearby-shot-name">${b.beanName || 'Unknown bean'}</div>
+              <div class="nearby-shot-meta">1:${ratio} · ${b.brewTime}s · ${b.doseIn}g→${b.yieldOut}g</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="nearby-shot-grind">${b.grindSize}</div>
+              <span class="similarity-badge">${matchType}</span>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>` : '';
+
+  const dataWarning = aiResult.dataQuality === 'none' || totalBrews === 0
+    ? `<div class="data-warning"><strong>No brew history yet.</strong> These estimates are based on espresso domain knowledge only. Log more shots to improve accuracy.</div>`
+    : aiResult.dataQuality === 'limited' || !hasMachineData
+    ? `<div class="data-warning"><strong>Limited data for this machine.</strong> Log more shots with this exact machine to improve estimates.</div>`
+    : '';
+
+  resultEl.innerHTML = `
+    ${dataWarning}
+    <div class="result-hero">
+      <div class="result-hero-label">↳ Recommended Settings</div>
+      <div class="result-main-grid">
+        <div class="result-big">
+          <div class="result-big-val">${aiResult.grindSize}<span class="result-big-unit">grind</span></div>
+          <div class="result-big-lbl">Grind Size</div>
+        </div>
+        <div class="result-big">
+          <div class="result-big-val">${aiResult.grindTime}<span class="result-big-unit">s</span></div>
+          <div class="result-big-lbl">Grind Time</div>
+        </div>
+      </div>
+      <div class="result-sub-grid">
+        <div class="result-sub-cell">
+          <div class="result-sub-val">${aiResult.tempOffset}</div>
+          <div class="result-sub-lbl">Temp offset</div>
+        </div>
+        <div class="result-sub-cell">
+          <div class="result-sub-val">1:${targetRatio.toFixed(1)}</div>
+          <div class="result-sub-lbl">Target ratio</div>
+        </div>
+        <div class="result-sub-cell">
+          <div class="result-sub-val">${brewTime}s</div>
+          <div class="result-sub-lbl">Brew time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="confidence-bar-wrap">
+      <div class="confidence-header">
+        <span class="confidence-label">Confidence</span>
+        <span class="confidence-pct" style="color:${confColor}">${confidence}%</span>
+      </div>
+      <div class="confidence-track">
+        <div class="confidence-fill" id="conf-fill" style="background: linear-gradient(90deg, ${confColor}, ${confColor}cc)"></div>
+      </div>
+    </div>
+
+    <div class="ai-reasoning">
+      <div class="ai-reasoning-label">
+        <div class="ai-dot done"></div>
+        AI Analysis
+      </div>
+      <div class="ai-reasoning-text">${aiResult.reasoning}</div>
+    </div>
+
+    ${nearbyHTML}
+  `;
+
+  // Animate confidence bar
+  setTimeout(() => {
+    const fill = document.getElementById('conf-fill');
+    if (fill) fill.style.width = confidence + '%';
+  }, 100);
+
+  document.getElementById('dialin-dot').classList.add('show');
+}
+
+/* ── API KEY MANAGEMENT ───────────────────────────────────────────────────── */
+window.__anthropicKey = sessionStorage.getItem('__el_ak') || null;
+
+function openKeyModal() {
+  const modal = document.getElementById('key-modal');
+  const input = document.getElementById('key-input');
+  if (window.__anthropicKey) input.value = window.__anthropicKey;
+  modal.classList.add('show');
+  setTimeout(() => input.focus(), 350);
+}
+
+function closeKeyModal() {
+  document.getElementById('key-modal').classList.remove('show');
+}
+
+function closeKeyModalOutside(e) {
+  if (e.target === document.getElementById('key-modal')) closeKeyModal();
+}
+
+function saveApiKey() {
+  const val = document.getElementById('key-input').value.trim();
+  if (!val.startsWith('sk-ant-')) { toast('Key should start with sk-ant-…', 'error'); return; }
+  window.__anthropicKey = val;
+  sessionStorage.setItem('__el_ak', val);
+  document.getElementById('key-btn').classList.add('set');
+  closeKeyModal();
+  toast('✓ API key saved for this session');
+}
+
+// Restore key indicator if already set
+if (window.__anthropicKey) {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('key-btn')?.classList.add('set');
+  });
 }
 
 /* ── INIT ─────────────────────────────────────────────────────────────────── */
