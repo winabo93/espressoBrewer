@@ -1991,15 +1991,11 @@ Based on this data, provide:
 4. Confidence level 0-100
 5. Brief reasoning (2-3 sentences max, highlight key factors like days off roast, ratio, and any pattern from history)
 
-Respond ONLY with this JSON, no other text:
-{
-  "grindSize": 7.5,
-  "grindTime": 22,
-  "tempOffset": "default",
-  "confidence": 78,
-  "reasoning": "...",
-  "dataQuality": "good|limited|none"
-}`;
+Return ONLY a raw JSON object. No markdown. No backticks. No explanation. Just the object:
+{"grindSize":7.5,"grindTime":22,"tempOffset":"default","confidence":78,"reasoning":"2-3 sentence explanation","dataQuality":"good"}
+
+dataQuality must be one of: "good", "limited", or "none".
+tempOffset must be one of: "-2", "-1", "0", "+1", "+2", or "default".`;
 
   // Capture button HTML before any async work
   const btn = document.getElementById('di-estimate-btn');
@@ -2052,9 +2048,10 @@ Respond ONLY with this JSON, no other text:
 
     const data = await response.json();
     const text = (data.content || []).map(c => c.text || '').join('');
-    const clean = text.replace(/```json[\s\S]*?```|```/g, '').trim();
-    try { aiResult = JSON.parse(clean); }
-    catch(e) { throw new Error('Could not parse AI response: ' + clean.slice(0, 120)); }
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON in response: ' + text.slice(0, 200));
+    try { aiResult = JSON.parse(jsonMatch[0]); }
+    catch(e) { throw new Error('JSON parse failed: ' + jsonMatch[0].slice(0, 200)); }
 
     resetBtn();
   } catch(err) {
