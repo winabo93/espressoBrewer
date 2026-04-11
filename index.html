@@ -2516,11 +2516,12 @@ Return ONLY this JSON object, no markdown, no backticks:
   const conf     = ai.confidence || 0;
   const confCol  = conf >= 70 ? '#4a8c5c' : conf >= 40 ? '#c8853a' : '#b84b3a';
   const dir      = ai.adjustmentDirection || 'neutral';
-  const dirCfg   = {
+  const dirMap   = {
     finer:   { label: '↓ Grind Finer',   color: '#4a8c5c' },
     coarser: { label: '↑ Grind Coarser', color: '#b84b3a' },
     neutral: { label: '→ Adjust Mix',    color: '#c8853a' }
-  }[dir];
+  };
+  const dirCfg   = dirMap[dir] || dirMap['neutral'];
 
   // Delta labels vs what was used
   function delta(newVal, oldVal, unit = '') {
