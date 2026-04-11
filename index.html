@@ -722,6 +722,172 @@ textarea {
 /* ── SECTION SPACER ──────────────────────────────────────────────────────── */
 .section-gap { height: 8px; }
 
+/* ── DATA LAB ────────────────────────────────────────────────────────────── */
+.datalab-section {
+  margin-top: 28px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.stat-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.stat-box-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--cream);
+  line-height: 1;
+}
+
+.stat-box-val.amber { color: var(--amber); }
+.stat-box-val.green { color: #4a8c5c; }
+.stat-box-val.red   { color: #b84b3a; }
+
+.stat-box-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.corr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+
+.corr-row:last-child { border-bottom: none; }
+
+.corr-label {
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+}
+
+.corr-bar-wrap {
+  width: 80px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.corr-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.corr-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--amber);
+  min-width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.shot-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border);
+}
+
+.timeline-row.good   { border-left-color: #4a8c5c; }
+.timeline-row.ok     { border-left-color: var(--amber); }
+.timeline-row.bad    { border-left-color: #b84b3a; }
+
+.timeline-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  min-width: 56px;
+  flex-shrink: 0;
+}
+
+.timeline-bean {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline-stats {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.ratio-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.ratio-chip.good   { background: rgba(74,140,92,0.15);  color: #4a8c5c; }
+.ratio-chip.ok     { background: rgba(200,133,58,0.15); color: var(--amber); }
+.ratio-chip.bad    { background: rgba(184,75,58,0.15);  color: #b84b3a; }
+
+.insight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.insight-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.insight-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+.insight-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.insight-text strong { color: var(--amber); }
+
 /* ── DESKTOP ENHANCEMENTS ────────────────────────────────────────────────── */
 @media (min-width: 640px) {
   main { padding: 28px 24px; }
@@ -835,6 +1001,76 @@ textarea {
 }
 
 /* ── DIAL-IN TAB ─────────────────────────────────────────────────────────── */
+/* Problem selector buttons */
+.problem-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  min-height: 80px;
+}
+.problem-btn:active { transform: scale(0.97); }
+.problem-btn.selected {
+  background: rgba(200,133,58,0.12);
+  border-color: var(--amber);
+}
+.problem-emoji { font-size: 22px; line-height: 1; }
+.problem-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cream);
+}
+.problem-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.problem-btn.selected .problem-label { color: var(--amber); }
+.problem-btn.selected .problem-hint  { color: var(--amber-lt); opacity: 0.7; }
+
+/* Adjustment direction indicator */
+.adj-direction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+.adj-direction.finer  { background: rgba(74,140,92,0.1);  border: 1px solid rgba(74,140,92,0.3); }
+.adj-direction.coarser{ background: rgba(184,75,58,0.1);  border: 1px solid rgba(184,75,58,0.3); }
+.adj-direction.neutral{ background: rgba(200,133,58,0.08); border: 1px solid rgba(200,133,58,0.2); }
+.adj-arrow {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.adj-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--cream);
+}
+.adj-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
 .dial-result {
   display: none;
   animation: fadeUp 0.3s ease;
@@ -1430,32 +1666,58 @@ textarea {
     <div id="history-list">
       <div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No shots logged yet</div></div>
     </div>
+
+    <!-- ── DATA LAB ── -->
+    <div class="datalab-section" id="datalab-section" style="display:none">
+      <p class="page-title" style="font-size:22px;margin-top:8px">Data Lab</p>
+      <p class="page-sub">Patterns & insights from your shots</p>
+
+      <div class="stat-grid" id="dl-stat-grid"></div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-label">Extraction Timeline</div>
+        <div class="shot-timeline" id="dl-timeline"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-label">What Affects Your Ratio?</div>
+        <div id="dl-correlations"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-label">AI Insights
+          <span style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:none;letter-spacing:0;color:var(--muted);margin-left:6px;">from your real data</span>
+        </div>
+        <div id="dl-insights">
+          <div class="empty-state" style="padding:24px 0">
+            <div class="empty-text">Tap "Run Analysis" to generate insights</div>
+          </div>
+        </div>
+        <button class="btn-primary" id="dl-run-btn" onclick="runDataLabAnalysis()" style="margin-top:12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Run AI Analysis
+        </button>
+        <div id="dl-insights-result" style="margin-top:12px"></div>
+      </div>
+    </div>
   </div>
 
 
   <!-- ══ DIAL IN ══ -->
   <div id="tab-dialin" class="tab-panel">
     <p class="page-title">Dial In</p>
-    <p class="page-sub">AI estimates your machine settings</p>
+    <p class="page-sub">Full-variable extraction diagnosis</p>
 
     <div class="card">
-      <div class="card-label">Your Setup</div>
+      <div class="card-label">Setup</div>
       <div class="field">
         <label>Machine</label>
-        <select id="di-machine">
-          <option value="">Select machine…</option>
-        </select>
+        <select id="di-machine"><option value="">Select machine…</option></select>
       </div>
-      <div class="field" style="margin-bottom:0">
+      <div class="field">
         <label>Coffee Bean</label>
-        <select id="di-bean">
-          <option value="">Select bean…</option>
-        </select>
+        <select id="di-bean"><option value="">Select bean…</option></select>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Bean Freshness</div>
       <div class="field" style="margin-bottom:0">
         <label>Roast Date</label>
         <input type="date" id="di-roast-date">
@@ -1463,7 +1725,7 @@ textarea {
     </div>
 
     <div class="card">
-      <div class="card-label">Target Shot</div>
+      <div class="card-label">Last Shot — Every Variable</div>
       <div class="field-row">
         <div class="field" style="margin-bottom:0">
           <label>Dose In (g)</label>
@@ -1482,23 +1744,116 @@ textarea {
           </div>
         </div>
       </div>
-      <div style="height:12px"></div>
+      <div style="height:10px"></div>
+      <div class="field-row">
       <div class="field" style="margin-bottom:0">
-        <label>Target Brew Time (s)</label>
+          <label>Grind Size</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-grind-used',-0.5)">−</button>
+            <input type="number" id="di-grind-used" placeholder="—" min="1" max="40" step="0.5">
+            <button class="stepper-btn" onclick="stepVal('di-grind-used',0.5)">+</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Grind Time (s)</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-grind-time-used',-1)">−</button>
+            <input type="number" id="di-grind-time-used" placeholder="—" min="0">
+            <button class="stepper-btn" onclick="stepVal('di-grind-time-used',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div style="height:10px"></div>
+      <div class="field-row">
+        <div class="field" style="margin-bottom:0">
+          <label>Brew Time (s)</label>
         <div class="stepper">
           <button class="stepper-btn" onclick="stepVal('di-brew-time',-1)">−</button>
           <input type="number" id="di-brew-time" value="28" min="0">
           <button class="stepper-btn" onclick="stepVal('di-brew-time',1)">+</button>
         </div>
       </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Temp Offset Used</label>
+          <select id="di-temp-used">
+            <option value="">Unknown</option>
+            <option value="-2">−2</option>
+            <option value="-1">−1</option>
+            <option value="0" selected>Default</option>
+            <option value="+1">+1</option>
+            <option value="+2">+2</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">What Was Wrong?</div>
+      <div id="di-problem-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
+        <button class="problem-btn" data-val="sour_thin" onclick="toggleProblem(this)">
+          <span class="problem-emoji">😬</span>
+          <span class="problem-label">Sour / Thin</span>
+          <span class="problem-hint">Under-extracted</span>
+        </button>
+        <button class="problem-btn" data-val="bitter_harsh" onclick="toggleProblem(this)">
+          <span class="problem-emoji">😖</span>
+          <span class="problem-label">Bitter / Harsh</span>
+          <span class="problem-hint">Over-extracted</span>
+        </button>
+        <button class="problem-btn" data-val="too_fast" onclick="toggleProblem(this)">
+          <span class="problem-emoji">💨</span>
+          <span class="problem-label">Ran Too Fast</span>
+          <span class="problem-hint">Low resistance</span>
+        </button>
+        <button class="problem-btn" data-val="too_slow" onclick="toggleProblem(this)">
+          <span class="problem-emoji">🐢</span>
+          <span class="problem-label">Ran Too Slow</span>
+          <span class="problem-hint">Too much resistance</span>
+        </button>
+        <button class="problem-btn" data-val="weak_watery" onclick="toggleProblem(this)">
+          <span class="problem-emoji">💧</span>
+          <span class="problem-label">Weak / Watery</span>
+          <span class="problem-hint">Low TDS</span>
+        </button>
+        <button class="problem-btn" data-val="good_but_tweak" onclick="toggleProblem(this)">
+          <span class="problem-emoji">👌</span>
+          <span class="problem-label">Good, Fine-tune</span>
+          <span class="problem-hint">Minor adjustment</span>
+        </button>
+      </div>
+      <div class="field" style="margin-top:12px;margin-bottom:0">
+        <label>Extra notes (optional)</label>
+        <textarea id="di-notes" placeholder="e.g. channelled left side, astringent finish, first shot of new bag…" style="min-height:66px"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Your Targets</div>
+      <div class="field-row">
+        <div class="field" style="margin-bottom:0">
+          <label>Target Yield (g)</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-target-yield',-0.5)">−</button>
+            <input type="number" id="di-target-yield" value="36" min="0" step="0.5">
+            <button class="stepper-btn" onclick="stepVal('di-target-yield',0.5)">+</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Target Time (s)</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="stepVal('di-target-time',-1)">−</button>
+            <input type="number" id="di-target-time" value="28" min="0">
+            <button class="stepper-btn" onclick="stepVal('di-target-time',1)">+</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button class="btn-primary" id="di-estimate-btn" onclick="runDialIn()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-      Estimate Settings
+      Diagnose &amp; Adjust
     </button>
 
-    <!-- Result area -->
     <div style="height:20px"></div>
     <div id="di-result" class="dial-result"></div>
   </div>
@@ -1629,7 +1984,7 @@ function switchTab(name) {
   if (name === 'machines') loadMachines();
   if (name === 'beans')    loadBeans();
   if (name === 'brew')     loadBrewSelects();
-  if (name === 'history')  { loadHistory(); document.getElementById('history-dot').classList.remove('show'); }
+  if (name === 'history')  { loadHistory(); loadDataLab(); document.getElementById('history-dot').classList.remove('show'); }
   if (name === 'dialin')   { loadDialInSelects(); document.getElementById('dialin-dot').classList.remove('show'); }
 }
 
@@ -1885,6 +2240,19 @@ function loadHistory() {
 }
 
 /* ── DIAL-IN ──────────────────────────────────────────────────────────────── */
+let diSelectedProblems = new Set();
+
+function toggleProblem(btn) {
+  const val = btn.dataset.val;
+  if (diSelectedProblems.has(val)) {
+    diSelectedProblems.delete(val);
+    btn.classList.remove('selected');
+  } else {
+    diSelectedProblems.add(val);
+    btn.classList.add('selected');
+  }
+}
+
 function loadDialInSelects() {
   Promise.all([dbGet('machines'), dbGet('beans')]).then(([ms, bs]) => {
     const mSel = document.getElementById('di-machine');
@@ -1902,123 +2270,209 @@ function loadDialInSelects() {
 }
 
 async function runDialIn() {
-  const machineId = document.getElementById('di-machine').value;
-  const beanId    = document.getElementById('di-bean').value;
-  const roastDate = document.getElementById('di-roast-date').value;
-  const dose      = parseFloat(document.getElementById('di-dose').value);
-  const yld       = parseFloat(document.getElementById('di-yield').value);
-  const brewTime  = parseInt(document.getElementById('di-brew-time').value);
+  const machineId     = document.getElementById('di-machine').value;
+  const beanId        = document.getElementById('di-bean').value;
+  const roastDate     = document.getElementById('di-roast-date').value;
+  const dose          = parseFloat(document.getElementById('di-dose').value) || null;
+  const yld           = parseFloat(document.getElementById('di-yield').value) || null;
+  const grindUsed     = parseFloat(document.getElementById('di-grind-used').value) || null;
+  const grindTimeUsed = parseFloat(document.getElementById('di-grind-time-used').value) || null;
+  const brewTime      = parseInt(document.getElementById('di-brew-time').value) || null;
+  const tempUsed      = document.getElementById('di-temp-used').value || 'unknown';
+  const targetYld     = parseFloat(document.getElementById('di-target-yield').value) || null;
+  const targetTime    = parseInt(document.getElementById('di-target-time').value) || null;
+  const userNotes     = document.getElementById('di-notes').value.trim();
+  const problems      = [...diSelectedProblems];
 
   if (!machineId || !beanId) { toast('Select a machine and bean first', 'error'); return; }
-  if (!dose || !yld || !brewTime) { toast('Fill in dose, yield and brew time', 'error'); return; }
+  if (!dose && !yld && !grindUsed) { toast('Fill in at least dose, yield and grind used', 'error'); return; }
 
   const machine = machineCache[machineId];
   const bean    = beanCache[beanId];
-  const daysSinceRoast = roastDate ? Math.floor((Date.now() - new Date(roastDate).getTime()) / 86400000) : null;
-  const targetRatio = yld / dose;
 
-  // Show thinking state
+  const daysSinceRoast = roastDate
+    ? Math.floor((Date.now() - new Date(roastDate).getTime()) / 86400000)
+    : null;
+
+  const actualRatio = (dose && yld) ? (yld / dose) : null;
+  const targetRatio = (dose && targetYld) ? (targetYld / dose) : null;
+
+  // ── Roast age category ──────────────────────────────────────────────────
+  function roastCategory(dsr) {
+    if (dsr === null) return 'unknown age';
+    if (dsr < 7)  return `VERY FRESH (${dsr}d) — degassing, high CO2, unpredictable extraction`;
+    if (dsr < 14) return `FRESH (${dsr}d) — still gassing off, may need coarser grind + higher temp`;
+    if (dsr < 21) return `OPTIMAL (${dsr}d) — peak flavour window`;
+    if (dsr < 35) return `PAST PEAK (${dsr}d) — slightly stale, may need finer grind`;
+    return `STALE (${dsr}d) — significant degassing complete, grind finer`;
+  }
+
   const resultEl = document.getElementById('di-result');
   resultEl.classList.add('show');
   resultEl.innerHTML = `
     <div class="thinking-state">
       <div class="thinking-dots"><span></span><span></span><span></span></div>
-      Analysing your brew history…
+      Analysing all variables…
     </div>`;
 
-  // Fetch all brew history
+  // ── Fetch all brew history ───────────────────────────────────────────────
   let brews = {};
   try { brews = await dbGet('brews') || {}; } catch(e) {}
+  const allBrews = Object.values(brews).filter(b => b.doseIn && b.yieldOut && b.brewTime);
 
-  // ── LOCAL INTERPOLATION ───────────────────────────────────────────────────
-  // Score each historical brew for similarity to the current request
-  const allBrews = Object.values(brews);
-  const relevantBrews = allBrews.filter(b =>
-    b.grindSize && b.doseIn && b.yieldOut && b.brewTime
-  );
-
-  // Score similarity: same machine gets heavy weight, same bean gets heavy weight,
-  // similar ratio and brew time also scored
-  function scoreBrew(b) {
-    let score = 0;
-    if (b.machineId === machineId) score += 40;
-    if (b.beanId === beanId) score += 30;
-    const ratioDiff = Math.abs((b.yieldOut / b.doseIn) - targetRatio);
-    score += Math.max(0, 20 - ratioDiff * 20);
-    const timeDiff = Math.abs(b.brewTime - brewTime);
-    score += Math.max(0, 10 - timeDiff);
-    return score;
+  // ── Outlier detection ────────────────────────────────────────────────────
+  function isOutlier(b) {
+    const d = parseFloat(b.doseIn), y = parseFloat(b.yieldOut);
+    return !d || !y || (y / d) < 0.5;
   }
 
-  const scored = relevantBrews
-    .map(b => ({ ...b, _score: scoreBrew(b) }))
-    .filter(b => b._score > 0)
+  // ── Score shots for relevance ────────────────────────────────────────────
+  function scoreShot(b) {
+    let s = 0;
+    if (b.machineId === machineId) s += 50;
+    if (b.beanId    === beanId)    s += 40;
+    // Reward shots close in roast age (within 5 days)
+    if (daysSinceRoast !== null && b.daysSinceRoast != null) {
+      const ageDelta = Math.abs(b.daysSinceRoast - daysSinceRoast);
+      s += Math.max(0, 10 - ageDelta * 2);
+    }
+    return s;
+  }
+
+  const relevantBrews = allBrews
+    .map(b => ({ ...b, _score: scoreShot(b) }))
+    .filter(b => b._score >= 50) // must be same machine minimum
     .sort((a, b) => b._score - a._score)
-    .slice(0, 5);
+    .slice(0, 10);
 
-  const hasMachineData  = scored.some(b => b.machineId === machineId);
-  const hasBeanData     = scored.some(b => b.beanId === beanId);
-  const totalBrews      = relevantBrews.length;
+  // ── Find empirical best settings from clean shots ────────────────────────
+  const cleanGoodShots = relevantBrews.filter(b => {
+    if (isOutlier(b)) return false;
+    const r = parseFloat(b.ratio) || (parseFloat(b.yieldOut) / parseFloat(b.doseIn));
+    return r >= 1.8 && r <= 2.6;
+  });
 
-  // Build context for Claude
-  const contextSummary = scored.length > 0
-    ? scored.map(b => {
-        const ratio = (b.yieldOut / b.doseIn).toFixed(2);
-        const dsr = b.daysSinceRoast !== null ? `${b.daysSinceRoast}d off roast` : '';
-        return `- Grind ${b.grindSize}, dose ${b.doseIn}g → ${b.yieldOut}g (1:${ratio}) in ${b.brewTime}s, grind time ${b.grindTime || '?'}s ${dsr} [machine match: ${b.machineId === machineId}, bean match: ${b.beanId === beanId}]`;
-      }).join('\n')
-    : 'No historical data available — use espresso domain knowledge only.';
+  const goodGrinds     = cleanGoodShots.map(b => parseFloat(b.grindSize)).filter(Boolean);
+  const goodDoses      = cleanGoodShots.map(b => parseFloat(b.doseIn)).filter(Boolean);
+  const goodGrindTimes = cleanGoodShots.map(b => parseFloat(b.grindTime)).filter(Boolean);
+  const goodBrewTimes  = cleanGoodShots.map(b => parseFloat(b.brewTime)).filter(Boolean);
+  const goodTemps      = cleanGoodShots.map(b => b.tempOffset || 'default').filter(Boolean);
+  const avg = arr => arr.length ? (arr.reduce((a,b) => a+b) / arr.length).toFixed(1) : null;
+  const mode = arr => arr.length ? arr.sort((a,b) =>
+    arr.filter(v=>v===a).length - arr.filter(v=>v===b).length).pop() : null;
 
-  const prompt = `You are an expert espresso technician and data analyst. A user wants to dial in their espresso machine. Analyse the data and provide precise machine setting recommendations.
+  const empirical = {
+    grind:     avg(goodGrinds),
+    dose:      avg(goodDoses),
+    grindTime: avg(goodGrindTimes),
+    brewTime:  avg(goodBrewTimes),
+    temp:      mode(goodTemps),
+    shotCount: cleanGoodShots.length
+  };
 
-MACHINE: ${machine?.name || 'Unknown'} (${machine?.brand || ''} ${machine?.model || ''})
-BEAN: ${bean?.name || 'Unknown'} — ${bean?.roast || ''} roast, ${bean?.type || ''}, ${bean?.process || ''} process, origin: ${bean?.country || 'unknown'}
-DAYS SINCE ROAST: ${daysSinceRoast !== null ? daysSinceRoast + ' days' : 'unknown'}
+  // ── Build shot history table for prompt ──────────────────────────────────
+  const historyTable = relevantBrews.map((b, i) => {
+    const r         = (parseFloat(b.yieldOut) / parseFloat(b.doseIn)).toFixed(2);
+    const dsr       = b.daysSinceRoast != null ? `${b.daysSinceRoast}d` : '?d';
+    const outlier   = isOutlier(b) ? ' [OUTLIER-IGNORE]' : '';
+    const good      = !isOutlier(b) && parseFloat(r) >= 1.8 && parseFloat(r) <= 2.6 ? ' [GOOD]' : '';
+    return `  #${i+1}: grind=${b.grindSize??'?'} grind_time=${b.grindTime??'?'}s dose=${b.doseIn}g→${b.yieldOut}g ratio=1:${r} brew=${b.brewTime}s temp=${b.tempOffset||'default'} dsr=${dsr}${good}${outlier}`;
+  }).join('\n') || '  No matching history.';
 
-TARGET SHOT:
-- Dose in: ${dose}g
-- Yield out: ${yld}g  
-- Target ratio: 1:${targetRatio.toFixed(2)}
-- Target brew time: ${brewTime}s
+  const problemMap = {
+    sour_thin:      'SOUR/THIN — under-extracted, insufficient dissolved solids',
+    bitter_harsh:   'BITTER/HARSH — over-extracted, too many solubles',
+    too_fast:       'RAN TOO FAST — low flow resistance, likely too coarse or under-dosed',
+    too_slow:       'RAN TOO SLOW — too much resistance, likely too fine or over-dosed',
+    weak_watery:    'WEAK/WATERY — low TDS, under-dosed or over-yielded',
+    good_but_tweak: 'GENERALLY GOOD — minor refinement needed'
+  };
+  const problemDesc = problems.length > 0
+    ? problems.map(p => problemMap[p] || p).join('; ')
+    : 'No specific taste problem described';
 
-HISTORICAL BREW DATA (${totalBrews} total shots logged, top ${scored.length} most relevant):
-${contextSummary}
+  const prompt = `You are a professional barista and extraction scientist. Diagnose this espresso shot using ALL available variables — grind, dose, yield, grind time, brew time, temperature, and bean age — then recommend specific corrected values for EVERY variable.
 
-Based on this data, provide:
-1. Recommended grind size (numeric, e.g. 7.5)
-2. Recommended grind time in seconds
-3. Water temperature offset (-2, -1, default, +1, or +2)
-4. Confidence level 0-100
-5. Brief reasoning (2-3 sentences max, highlight key factors like days off roast, ratio, and any pattern from history)
+═══ EQUIPMENT ═══
+Machine: ${machine?.name || 'Unknown'} (${machine?.brand || ''} ${machine?.model || ''})
+  - Grind wheel: higher number = coarser, lower number = finer
+  - Temp offset: -2 to +2 relative to machine default
+Bean: ${bean?.name || 'Unknown'}
+  - Roast: ${bean?.roast || 'unknown'} | Process: ${bean?.process || 'unknown'} | Type: ${bean?.type || 'unknown'} | Origin: ${bean?.country || 'unknown'}
+Bean age: ${roastCategory(daysSinceRoast)}
 
-Return ONLY a raw JSON object. No markdown. No backticks. No explanation. Just the object:
-{"grindSize":7.5,"grindTime":22,"tempOffset":"default","confidence":78,"reasoning":"2-3 sentence explanation","dataQuality":"good"}
+═══ LAST SHOT (the one that was wrong) ═══
+Grind size:  ${grindUsed ?? 'not entered'}
+Grind time:  ${grindTimeUsed != null ? grindTimeUsed + 's' : 'not entered'}
+Dose in:     ${dose != null ? dose + 'g' : 'not entered'}
+Yield out:   ${yld != null ? yld + 'g' : 'not entered'}
+Ratio:       ${actualRatio ? '1:' + actualRatio.toFixed(2) : 'unknown'}
+Brew time:   ${brewTime != null ? brewTime + 's' : 'not entered'}
+Temp offset: ${tempUsed}
+Problem:     ${problemDesc}
+Notes:       ${userNotes || 'none'}
 
-dataQuality must be one of: "good", "limited", or "none".
-tempOffset must be one of: "-2", "-1", "0", "+1", "+2", or "default".`;
+═══ TARGETS ═══
+Target yield:  ${targetYld != null ? targetYld + 'g' : 'not set'} → ratio 1:${targetRatio ? targetRatio.toFixed(2) : '?'}
+Target time:   ${targetTime != null ? targetTime + 's' : 'not set'}
+Ideal espresso: ratio 1:2.0–1:2.5, brew time 25–32s
 
-  // Capture button HTML before any async work
+═══ EMPIRICAL BEST SETTINGS (from ${empirical.shotCount} good shots on this machine) ═══
+${empirical.shotCount > 0 ? `Best grind average:      ${empirical.grind}
+Best dose average:       ${empirical.dose}g
+Best grind time average: ${empirical.grindTime}s
+Best brew time average:  ${empirical.brewTime}s
+Best temp:               ${empirical.temp}
+→ These are ground truth for this machine. Anchor your recommendation here.` : 'No good shots on record yet — use extraction physics only.'}
+
+═══ SHOT HISTORY (same machine, newest first) ═══
+${historyTable}
+
+═══ YOUR TASK ═══
+1. Diagnose the ROOT CAUSE — which variable(s) caused the problem?
+2. Recommend corrected values for ALL variables:
+   - grindSize (number)
+   - grindTime (seconds) — affects dose weight; longer = more coffee
+   - doseIn (grams)
+   - targetYield (grams)
+   - brewTime (seconds, expected result)
+   - tempOffset ("-2","-1","0","+1","+2")
+3. For each change explain WHY in 1 sentence
+4. Confidence 0–100 based on how much history supports the recommendation
+
+VARIABLE INTERACTION RULES (apply these):
+- Grind finer → more resistance → slower brew → less yield (for same time)
+- Grind coarser → less resistance → faster brew → more yield (for same time)
+- More dose → more resistance → slower brew (even with same grind)
+- Less dose → less resistance → faster brew
+- Longer grind time → heavier dose (if grinder dose-by-time)
+- Higher temp → more extraction → can compensate for slightly coarse grind
+- Fresh beans (<14d) → lots of CO2 → channelling risk → go slightly coarser + higher temp
+- Stale beans (>28d) → less CO2 → grinds finer needed for same extraction
+- Roast age MUST influence your recommendation
+
+CRITICAL: If empirical best settings exist, do NOT deviate from them without a clear reason from the problem description. The data is more reliable than theory.
+
+Return ONLY this JSON object, no markdown, no backticks:
+{"grindSize":12,"grindTime":11,"doseIn":18,"targetYield":36,"expectedBrewTime":27,"tempOffset":"0","confidence":88,"reasoning":"2-3 sentences citing specific data points and explaining each change","adjustmentDirection":"neutral","rootCause":"one sentence describing the primary problem"}`;
+
+  // ── Button state ─────────────────────────────────────────────────────────
   const btn = document.getElementById('di-estimate-btn');
   const estimateBtnHTML = btn.innerHTML;
+  function resetBtn() { btn.disabled = false; btn.innerHTML = estimateBtnHTML; }
 
-  function resetBtn() {
-    btn.disabled = false;
-    btn.innerHTML = estimateBtnHTML;
-  }
-
-  // Check API key before touching the button
   const apiKey = window.__anthropicKey;
   if (!apiKey) {
-    resultEl.innerHTML = `<div class="data-warning"><strong>API key not set.</strong> Tap the 🔑 key icon in the top-right corner to enter your Anthropic API key. Get one free at <a href="https://console.anthropic.com" target="_blank" style="color:var(--amber-lt)">console.anthropic.com</a>.</div>`;
+    resultEl.innerHTML = `<div class="data-warning"><strong>API key not set.</strong> Tap the 🔑 icon to enter your Anthropic API key.</div>`;
     return;
   }
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span> Analysing…';
+  btn.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span> Diagnosing…';
 
-  let aiResult = null;
+  let ai = null;
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -2028,106 +2482,122 @@ tempOffset must be one of: "-2", "-1", "0", "+1", "+2", or "default".`;
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1000,
+        max_tokens: 1200,
         messages: [{ role: 'user', content: prompt }]
       })
     });
 
-    if (response.status === 401) {
-      localStorage.removeItem('__el_ak');
-      sessionStorage.removeItem('__el_ak');
+    if (resp.status === 401) {
+      localStorage.removeItem('__el_ak'); sessionStorage.removeItem('__el_ak');
       window.__anthropicKey = null;
       document.getElementById('key-btn')?.classList.remove('set');
       throw new Error('Invalid API key — cleared. Tap 🔑 to re-enter.');
     }
-
-    if (!response.ok) {
-      const errBody = await response.json().catch(() => ({}));
-      throw new Error(`HTTP ${response.status}: ${errBody?.error?.message || 'Unknown error'}`);
+    if (!resp.ok) {
+      const e = await resp.json().catch(() => ({}));
+      throw new Error(`HTTP ${resp.status}: ${e?.error?.message || 'Unknown'}`);
     }
 
-    const data = await response.json();
+    const data = await resp.json();
     const text = (data.content || []).map(c => c.text || '').join('');
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('No JSON in response: ' + text.slice(0, 200));
-    try { aiResult = JSON.parse(jsonMatch[0]); }
-    catch(e) { throw new Error('JSON parse failed: ' + jsonMatch[0].slice(0, 200)); }
-
+    const match = text.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('No JSON in response: ' + text.slice(0, 200));
+    ai = JSON.parse(match[0]);
     resetBtn();
   } catch(err) {
     resetBtn();
-    const keyPreview = window.__anthropicKey
-      ? window.__anthropicKey.slice(0,10) + '…' + window.__anthropicKey.slice(-4)
-      : 'NOT SET';
-    resultEl.innerHTML = `<div class="data-warning">
-      <strong>❌ ${err.message}</strong><br><br>
-      <strong>Key in use:</strong> <code style="color:var(--amber-lt);font-size:11px">${keyPreview}</code><br><br>
-      Try these steps:<br>
-      1. Tap 🔑 and re-paste your full API key<br>
-      2. Confirm it starts with <code>sk-ant-api03-</code><br>
-      3. Check you have credits at <a href="https://console.anthropic.com/settings/billing" target="_blank" style="color:var(--amber-lt)">console.anthropic.com/settings/billing</a>
-    </div>`;
+    const kp = window.__anthropicKey
+      ? window.__anthropicKey.slice(0,10) + '…' + window.__anthropicKey.slice(-4) : 'NOT SET';
+    resultEl.innerHTML = `<div class="data-warning"><strong>❌ ${err.message}</strong><br><br>Key: <code style="color:var(--amber-lt);font-size:11px">${kp}</code></div>`;
     return;
   }
 
-  // ── RENDER RESULT ─────────────────────────────────────────────────────────
-  const confidence = aiResult.confidence || 0;
-  const confColor  = confidence >= 70 ? '#4a8c5c' : confidence >= 40 ? '#c8853a' : '#b84b3a';
+  // ── Render full multi-variable result ────────────────────────────────────
+  const conf     = ai.confidence || 0;
+  const confCol  = conf >= 70 ? '#4a8c5c' : conf >= 40 ? '#c8853a' : '#b84b3a';
+  const dir      = ai.adjustmentDirection || 'neutral';
+  const dirCfg   = {
+    finer:   { label: '↓ Grind Finer',   color: '#4a8c5c' },
+    coarser: { label: '↑ Grind Coarser', color: '#b84b3a' },
+    neutral: { label: '→ Adjust Mix',    color: '#c8853a' }
+  }[dir];
 
-  const nearbyHTML = scored.length > 0 ? `
+  // Delta labels vs what was used
+  function delta(newVal, oldVal, unit = '') {
+    if (newVal == null || oldVal == null) return '';
+    const d = newVal - oldVal;
+    if (Math.abs(d) < 0.05) return '<span style="color:var(--muted);font-size:10px"> (no change)</span>';
+    const col = '#c8853a';
+    return `<span style="color:${col};font-size:10px"> (${d > 0 ? '+' : ''}${d.toFixed(1)}${unit})</span>`;
+  }
+
+  const nearbyHTML = cleanGoodShots.length > 0 ? `
     <div class="nearby-shots">
-      <div class="card-label">Reference Shots</div>
-      ${scored.slice(0,3).map(b => {
-        const ratio = (b.yieldOut / b.doseIn).toFixed(1);
-        const matchType = b.machineId === machineId && b.beanId === beanId ? 'same machine + bean'
-                        : b.machineId === machineId ? 'same machine'
-                        : b.beanId === beanId ? 'same bean' : 'similar ratio';
-        return `
-          <div class="nearby-shot-row">
+      <div class="card-label">Anchored to ${cleanGoodShots.length} good shot${cleanGoodShots.length > 1 ? 's' : ''}</div>
+      ${cleanGoodShots.slice(0,3).map(b => {
+        const r = (parseFloat(b.yieldOut)/parseFloat(b.doseIn)).toFixed(1);
+        const d = new Date(b.loggedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+        return `<div class="nearby-shot-row">
             <div>
-              <div class="nearby-shot-name">${b.beanName || 'Unknown bean'}</div>
-              <div class="nearby-shot-meta">1:${ratio} · ${b.brewTime}s · ${b.doseIn}g→${b.yieldOut}g</div>
+            <div class="nearby-shot-name">${b.beanName||'?'}</div>
+            <div class="nearby-shot-meta">g${b.grindSize} · ${b.doseIn}g→${b.yieldOut}g · ${b.brewTime}s · ${b.daysSinceRoast??'?'}d off roast</div>
             </div>
-            <div style="text-align:right;">
-              <div class="nearby-shot-grind">${b.grindSize}</div>
-              <span class="similarity-badge">${matchType}</span>
+          <div style="text-align:right">
+            <div class="nearby-shot-grind">1:${r}</div>
+            <span class="similarity-badge">${d}</span>
             </div>
           </div>`;
       }).join('')}
     </div>` : '';
 
-  const dataWarning = aiResult.dataQuality === 'none' || totalBrews === 0
-    ? `<div class="data-warning"><strong>No brew history yet.</strong> These estimates are based on espresso domain knowledge only. Log more shots to improve accuracy.</div>`
-    : aiResult.dataQuality === 'limited' || !hasMachineData
-    ? `<div class="data-warning"><strong>Limited data for this machine.</strong> Log more shots with this exact machine to improve estimates.</div>`
-    : '';
-
   resultEl.innerHTML = `
-    ${dataWarning}
+    ${ai.rootCause ? `<div style="background:rgba(200,133,58,0.08);border:1px solid rgba(200,133,58,0.2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--text);line-height:1.5">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:5px">Root Cause</span>
+      ${ai.rootCause}
+    </div>` : ''}
+
+    <div class="adj-direction ${dir}" style="margin-bottom:14px">
+      <div class="adj-arrow">${dir==='finer'?'🔽':dir==='coarser'?'🔼':'⚖️'}</div>
+      <div>
+        <div class="adj-text" style="color:${dirCfg.color}">${dirCfg.label}</div>
+        <div class="adj-sub">Bean age: ${daysSinceRoast != null ? daysSinceRoast + 'd off roast' : 'unknown'}</div>
+      </div>
+    </div>
+
     <div class="result-hero">
-      <div class="result-hero-label">↳ Recommended Settings</div>
-      <div class="result-main-grid">
+      <div class="result-hero-label">↳ Recommended Settings — All Variables</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
         <div class="result-big">
-          <div class="result-big-val">${aiResult.grindSize}<span class="result-big-unit">grind</span></div>
-          <div class="result-big-lbl">Grind Size</div>
+          <div class="result-big-val">${ai.grindSize ?? '—'}<span class="result-big-unit">grind</span></div>
+          <div class="result-big-lbl">Grind Size${delta(ai.grindSize, grindUsed)}</div>
         </div>
         <div class="result-big">
-          <div class="result-big-val">${aiResult.grindTime}<span class="result-big-unit">s</span></div>
-          <div class="result-big-lbl">Grind Time</div>
+          <div class="result-big-val">${ai.grindTime ?? '—'}<span class="result-big-unit">s</span></div>
+          <div class="result-big-lbl">Grind Time${delta(ai.grindTime, grindTimeUsed, 's')}</div>
+        </div>
+        <div class="result-big">
+          <div class="result-big-val">${ai.doseIn ?? '—'}<span class="result-big-unit">g</span></div>
+          <div class="result-big-lbl">Dose In${delta(ai.doseIn, dose, 'g')}</div>
+      </div>
+        <div class="result-big">
+          <div class="result-big-val">${ai.targetYield ?? '—'}<span class="result-big-unit">g</span></div>
+          <div class="result-big-lbl">Target Yield${delta(ai.targetYield, yld, 'g')}</div>
         </div>
       </div>
+
       <div class="result-sub-grid">
         <div class="result-sub-cell">
-          <div class="result-sub-val">${aiResult.tempOffset}</div>
+          <div class="result-sub-val">${ai.expectedBrewTime ?? '—'}<span style="font-size:10px;color:var(--muted)">s</span></div>
+          <div class="result-sub-lbl">Expected time</div>
+        </div>
+        <div class="result-sub-cell">
+          <div class="result-sub-val">${ai.tempOffset ?? '—'}</div>
           <div class="result-sub-lbl">Temp offset</div>
         </div>
         <div class="result-sub-cell">
-          <div class="result-sub-val">1:${targetRatio.toFixed(1)}</div>
+          <div class="result-sub-val">1:${ai.doseIn && ai.targetYield ? (ai.targetYield/ai.doseIn).toFixed(1) : '?'}</div>
           <div class="result-sub-lbl">Target ratio</div>
-        </div>
-        <div class="result-sub-cell">
-          <div class="result-sub-val">${brewTime}s</div>
-          <div class="result-sub-lbl">Brew time</div>
         </div>
       </div>
     </div>
@@ -2135,34 +2605,30 @@ tempOffset must be one of: "-2", "-1", "0", "+1", "+2", or "default".`;
     <div class="confidence-bar-wrap">
       <div class="confidence-header">
         <span class="confidence-label">Confidence</span>
-        <span class="confidence-pct" style="color:${confColor}">${confidence}%</span>
+        <span class="confidence-pct" style="color:${confCol}">${conf}%</span>
       </div>
       <div class="confidence-track">
-        <div class="confidence-fill" id="conf-fill" style="background: linear-gradient(90deg, ${confColor}, ${confColor}cc)"></div>
+        <div class="confidence-fill" id="conf-fill" style="background:linear-gradient(90deg,${confCol},${confCol}cc)"></div>
       </div>
     </div>
 
     <div class="ai-reasoning">
-      <div class="ai-reasoning-label">
-        <div class="ai-dot done"></div>
-        AI Analysis
-      </div>
-      <div class="ai-reasoning-text">${aiResult.reasoning}</div>
+      <div class="ai-reasoning-label"><div class="ai-dot done"></div>Diagnosis</div>
+      <div class="ai-reasoning-text">${ai.reasoning}</div>
     </div>
 
     ${nearbyHTML}
   `;
 
-  // Animate confidence bar
   setTimeout(() => {
     const fill = document.getElementById('conf-fill');
-    if (fill) fill.style.width = confidence + '%';
+    if (fill) fill.style.width = conf + '%';
   }, 100);
 
   document.getElementById('dialin-dot').classList.add('show');
 }
 
-/* ── API KEY MANAGEMENT ───────────────────────────────────────────────────── */
+/* ── API KEY MANAGEMENT/* ── API KEY MANAGEMENT ───────────────────────────────────────────────────── */
 window.__anthropicKey = localStorage.getItem('__el_ak') || sessionStorage.getItem('__el_ak') || null;
 window.__proxyUrl = localStorage.getItem('__el_proxy') || null;
 
@@ -2234,6 +2700,290 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.__anthropicKey) document.getElementById('key-btn')?.classList.add('set');
 
 });
+
+/* ── DATA LAB ─────────────────────────────────────────────────────────────── */
+async function loadDataLab() {
+  let brews = {};
+  try { brews = await dbGet('brews') || {}; } catch(e) { return; }
+  const shots = Object.values(brews)
+    .filter(b => b.doseIn && b.yieldOut && b.brewTime)
+    .sort((a, b) => new Date(a.loggedAt) - new Date(b.loggedAt));
+
+  if (shots.length < 2) return; // need at least 2 shots for patterns
+  document.getElementById('datalab-section').style.display = 'block';
+
+  renderDLStats(shots);
+  renderDLTimeline(shots);
+  renderDLCorrelations(shots);
+}
+
+// ── Classify a shot's ratio ────────────────────────────────────────────────
+// Ideal espresso ratio: 1:2 to 1:2.5 (ratio 2.0–2.5)
+function classifyRatio(ratio) {
+  if (ratio >= 1.8 && ratio <= 2.6) return 'good';
+  if (ratio >= 1.5 && ratio <= 3.0) return 'ok';
+  return 'bad';
+}
+
+function ratioLabel(ratio) {
+  if (ratio < 1.5) return 'too strong';
+  if (ratio < 1.8) return 'strong';
+  if (ratio <= 2.6) return 'on target';
+  if (ratio <= 3.0) return 'light';
+  return 'too light';
+}
+
+// ── Summary stats ─────────────────────────────────────────────────────────
+function renderDLStats(shots) {
+  const ratios     = shots.map(b => parseFloat(b.ratio) || (b.yieldOut / b.doseIn));
+  const brewTimes  = shots.map(b => parseInt(b.brewTime));
+  const goodShots  = shots.filter(b => {
+    const r = parseFloat(b.ratio) || (b.yieldOut / b.doseIn);
+    return classifyRatio(r) === 'good';
+  });
+  const avgRatio   = (ratios.reduce((a,b) => a+b, 0) / ratios.length).toFixed(2);
+  const avgTime    = Math.round(brewTimes.reduce((a,b) => a+b, 0) / brewTimes.length);
+  const successPct = Math.round(goodShots.length / shots.length * 100);
+
+  // Trend: are recent shots better than older ones?
+  const half     = Math.floor(shots.length / 2);
+  const oldAvg   = ratios.slice(0, half).reduce((a,b) => a+b, 0) / half;
+  const newAvg   = ratios.slice(half).reduce((a,b) => a+b, 0) / (ratios.length - half);
+  const trend    = Math.abs(newAvg - 2.1) < Math.abs(oldAvg - 2.1) ? '↑' : '↓';
+  const trendCol = trend === '↑' ? 'green' : 'red';
+
+  document.getElementById('dl-stat-grid').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-box-val">${shots.length}</div>
+      <div class="stat-box-lbl">Shots logged</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val amber">1:${avgRatio}</div>
+      <div class="stat-box-lbl">Avg ratio</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val ${successPct >= 60 ? 'green' : successPct >= 40 ? 'amber' : 'red'}">${successPct}%</div>
+      <div class="stat-box-lbl">On-target shots</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val">${avgTime}s</div>
+      <div class="stat-box-lbl">Avg brew time</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val ${trendCol}">${trend}</div>
+      <div class="stat-box-lbl">Trend</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val">${[...new Set(shots.map(b => b.beanId))].length}</div>
+      <div class="stat-box-lbl">Bean varieties</div>
+    </div>`;
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────
+function renderDLTimeline(shots) {
+  // Show last 10 shots, newest first
+  const recent = [...shots].reverse().slice(0, 10);
+  document.getElementById('dl-timeline').innerHTML = recent.map(b => {
+    const ratio   = parseFloat(b.ratio) || (b.yieldOut / b.doseIn);
+    const cls     = classifyRatio(ratio);
+    const lbl     = ratioLabel(ratio);
+    const date    = b.loggedAt ? new Date(b.loggedAt).toLocaleDateString('en-GB', { day:'numeric', month:'short' }) : '?';
+    return `
+      <div class="timeline-row ${cls}">
+        <div class="timeline-date">${date}</div>
+        <div class="timeline-bean">${b.beanName || 'Unknown bean'}</div>
+        <div class="timeline-stats">g${b.grindSize || '?'} · ${b.brewTime}s</div>
+        <div class="ratio-chip ${cls}">1:${ratio.toFixed(1)} ${lbl}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── Correlations ──────────────────────────────────────────────────────────
+// Simple Pearson correlation between grind size / brew time / days off roast and ratio
+function pearson(xs, ys) {
+  const n = xs.length;
+  if (n < 3) return null;
+  const mx = xs.reduce((a,b) => a+b) / n;
+  const my = ys.reduce((a,b) => a+b) / n;
+  const num = xs.reduce((s, x, i) => s + (x - mx) * (ys[i] - my), 0);
+  const dx  = Math.sqrt(xs.reduce((s, x) => s + (x - mx) ** 2, 0));
+  const dy  = Math.sqrt(ys.reduce((s, y) => s + (y - my) ** 2, 0));
+  if (dx === 0 || dy === 0) return null;
+  return num / (dx * dy);
+}
+
+function renderDLCorrelations(shots) {
+  const ratios   = shots.map(b => parseFloat(b.ratio) || (b.yieldOut / b.doseIn));
+  const grinds   = shots.map(b => parseFloat(b.grindSize)).filter((v, i) => !isNaN(v));
+  const times    = shots.map(b => parseInt(b.brewTime));
+  const dsr      = shots.filter(b => b.daysSinceRoast != null).map(b => parseInt(b.daysSinceRoast));
+  const dsrRatio = shots.filter(b => b.daysSinceRoast != null).map(b => parseFloat(b.ratio) || (b.yieldOut / b.doseIn));
+
+  const grindRatios = shots.filter(b => !isNaN(parseFloat(b.grindSize))).map(b => parseFloat(b.ratio) || (b.yieldOut / b.doseIn));
+
+  const correlations = [
+    {
+      label: 'Grind size → ratio',
+      r: grinds.length >= 3 ? pearson(grinds, grindRatios) : null,
+      hint: 'Positive = coarser grind gives higher (lighter) ratio'
+    },
+    {
+      label: 'Brew time → ratio',
+      r: pearson(times, ratios),
+      hint: 'Negative = longer brew = lower (stronger) ratio'
+    },
+    {
+      label: 'Days off roast → ratio',
+      r: dsr.length >= 3 ? pearson(dsr, dsrRatio) : null,
+      hint: 'Positive = older beans extract lighter'
+    }
+  ].filter(c => c.r !== null);
+
+  if (!correlations.length) {
+    document.getElementById('dl-correlations').innerHTML =
+      '<div class="empty-text" style="padding:16px 0;text-align:center">Not enough varied data yet — log more shots with different grind sizes</div>';
+    return;
+  }
+
+  document.getElementById('dl-correlations').innerHTML = correlations.map(c => {
+    const pct   = Math.abs(c.r) * 100;
+    const color = Math.abs(c.r) > 0.5 ? '#4a8c5c' : Math.abs(c.r) > 0.25 ? 'var(--amber)' : 'var(--muted)';
+    const dir   = c.r > 0 ? '↑' : '↓';
+    const str   = Math.abs(c.r) > 0.6 ? 'strong' : Math.abs(c.r) > 0.35 ? 'moderate' : 'weak';
+    return `
+      <div class="corr-row">
+        <div>
+          <div class="corr-label">${c.label}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:0.06em">${c.hint}</div>
+        </div>
+        <div class="corr-bar-wrap">
+          <div class="corr-bar" style="width:${pct}%;background:${color}"></div>
+        </div>
+        <div class="corr-val">${dir} ${str}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── AI Analysis ───────────────────────────────────────────────────────────
+async function runDataLabAnalysis() {
+  const apiKey = window.__anthropicKey;
+  if (!apiKey) { toast('Set your API key first (🔑 icon)', 'error'); return; }
+
+  let brews = {};
+  try { brews = await dbGet('brews') || {}; } catch(e) { toast('Could not load brew data', 'error'); return; }
+
+  const shots = Object.values(brews)
+    .filter(b => b.doseIn && b.yieldOut && b.brewTime)
+    .sort((a, b) => new Date(a.loggedAt) - new Date(b.loggedAt));
+
+  if (shots.length < 2) { toast('Log at least 2 shots first', 'error'); return; }
+
+  const btn = document.getElementById('dl-run-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span> Analysing…';
+
+  const insightsEl = document.getElementById('dl-insights-result');
+  insightsEl.innerHTML = '<div class="thinking-state"><div class="thinking-dots"><span></span><span></span><span></span></div>Reading your shots…</div>';
+
+  // Build a rich shot summary for Claude
+  const shotSummary = shots.map((b, i) => {
+    const ratio  = (parseFloat(b.ratio) || (b.yieldOut / b.doseIn)).toFixed(2);
+    const date   = b.loggedAt ? new Date(b.loggedAt).toLocaleDateString('en-GB') : '?';
+    return `Shot ${i+1} (${date}): bean="${b.beanName||'?'}", grind=${b.grindSize||'?'}, dose=${b.doseIn}g→${b.yieldOut}g, ratio=1:${ratio}, brew=${b.brewTime}s, grind_time=${b.grindTime||'?'}s, days_off_roast=${b.daysSinceRoast??'?'}${b.notes ? `, notes="${b.notes}"` : ''}`;
+  }).join('\n');
+
+  const machines = [...new Set(shots.map(b => b.machineName))].join(', ');
+  const beans    = [...new Set(shots.map(b => b.beanName))].join(', ');
+  const ratios   = shots.map(b => parseFloat(b.ratio) || (b.yieldOut / b.doseIn));
+  const avgRatio = (ratios.reduce((a,b) => a+b) / ratios.length).toFixed(2);
+  const grinds   = shots.filter(b => b.grindSize).map(b => parseFloat(b.grindSize));
+  const avgGrind = grinds.length ? (grinds.reduce((a,b) => a+b) / grinds.length).toFixed(1) : 'unknown';
+
+  // Flag outliers before sending to AI
+  const cleanShots  = shots.filter(b => {
+    const d = parseFloat(b.doseIn), y = parseFloat(b.yieldOut);
+    return d && y && (y/d) >= 0.5;
+  });
+  const outlierShots = shots.filter(b => {
+    const d = parseFloat(b.doseIn), y = parseFloat(b.yieldOut);
+    return !d || !y || (y/d) < 0.5;
+  });
+  const goodClean = cleanShots.filter(b => {
+    const r = parseFloat(b.ratio) || (parseFloat(b.yieldOut)/parseFloat(b.doseIn));
+    return r >= 1.8 && r <= 2.6;
+  });
+
+  const prompt = `You are an expert barista analysing a home espresso brewer's complete shot log. Give specific, actionable insights using ONLY their actual data — cite real numbers, dates and shot results.
+
+BREWER'S DATA SUMMARY:
+- Total shots: ${shots.length} (clean: ${cleanShots.length}, outliers excluded: ${outlierShots.length})
+- Good shots on target (ratio 1.8-2.6): ${goodClean.length}
+- Machine: ${machines}
+- Bean(s): ${beans}
+- Average ratio (clean shots): 1:${avgRatio}
+- Average grind: ${avgGrind}
+- Date range: ${shots[0]?.loggedAt ? new Date(shots[0].loggedAt).toLocaleDateString('en-GB') : '?'} to ${shots[shots.length-1]?.loggedAt ? new Date(shots[shots.length-1].loggedAt).toLocaleDateString('en-GB') : '?'}
+
+FULL SHOT LOG (chronological):
+${shotSummary}
+
+RULES FOR YOUR ANALYSIS:
+- Shots with ratio below 0.5 are MECHANICAL FAILURES (channelling/blocked basket) not grind feedback - flag them as such
+- Cite specific shot dates and values in your insights
+- The grind wheel on this machine: lower number = finer, higher number = coarser
+- Focus on what settings actually produced good ratios vs bad
+
+Give 4-6 insights covering: what grind works, what went wrong on bad shots, whether outliers were equipment or grind issues, improvement trend, and one concrete next-shot recommendation.
+
+Format as JSON array only:
+[{"icon":"emoji","title":"max 5 words","text":"2-3 sentences with actual numbers from their data"}]
+
+Return ONLY the JSON array. No markdown. No backticks. No other text.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1500,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data  = await response.json();
+    const text  = (data.content || []).map(c => c.text || '').join('');
+    const match = text.match(/\[[\s\S]*\]/);
+    if (!match) throw new Error('No JSON array in response');
+    const insights = JSON.parse(match[0]);
+
+    insightsEl.innerHTML = `<div class="insight-list">${
+      insights.map(ins => `
+        <div class="insight-item">
+          <div class="insight-icon">${ins.icon || '💡'}</div>
+          <div>
+            <div style="font-weight:600;color:var(--cream);margin-bottom:4px;font-size:14px">${ins.title}</div>
+            <div class="insight-text">${ins.text}</div>
+          </div>
+        </div>`).join('')
+    }</div>`;
+
+    // Also update the placeholder in dl-insights
+    document.getElementById('dl-insights').innerHTML = '';
+
+  } catch(err) {
+    insightsEl.innerHTML = `<div class="data-warning"><strong>Analysis failed:</strong> ${err.message}</div>`;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Re-run Analysis`;
+}
 
 /* ── INIT ─────────────────────────────────────────────────────────────────── */
 (function waitForFirebase(n) {
